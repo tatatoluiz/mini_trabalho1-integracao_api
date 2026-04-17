@@ -340,6 +340,46 @@ async function atualizarDispositivo() {
 async function excluirDispositivo() {
   alert('Botão EXCLUIR clicado!');
   // TODO: Passo 5
+  // 1. Ler o ID do campo campoId e validar se está preenchido
+  const id = campoId.value.trim();
+  if (!id){
+
+    mostrarMensagem('Digite um ID para excluir.', 'erro');
+    return;
+
+  }
+
+  // 2. Confirmar com o usuário
+  const confirmou = confirm('Tem certeza que deseja excluir?');
+  if (!confirmou) {
+
+    return;
+
+  }
+
+  // 3. Fazer a requisição fetch()
+  const respostaHTTP = await fetch(`${URL_API}/${id}` {
+
+    method: 'DELETE'
+
+  })
+  // 4. Verificar se a resposta foi bem-sucedida
+  if (!respostaHTTP.ok) {
+
+    mostrarMensagem('Dispositivo não encontrado (ID: ' + id + ').')
+    return;
+
+  }
+  // 5. Remover o item do vetor local
+  dispositivos = dispositivos.filter(d =>{
+
+    d.id != id;
+
+  })
+  // 6. Chamar renderizar() para redesenhar a tabela
+  renderizar();
+  // 7. Limpar o formulário e exibir mensagem de sucesso
+  limparFormulario();
 }
 
 // ============================================================
