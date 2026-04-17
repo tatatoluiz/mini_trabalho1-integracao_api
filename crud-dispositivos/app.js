@@ -353,7 +353,7 @@ async function excluirDispositivo() {
   // 2. Confirmar com o usuário
   const confirmou = confirm('Tem certeza que deseja excluir?');
   if (!confirmou) {
-
+  
     return;
 
   }
@@ -372,7 +372,7 @@ async function excluirDispositivo() {
 
   }
   // 5. Remover o item do vetor local
-  dispositivos = dispositivos.filter(d =>{
+  dispositivos = dispositivos.filter((d) =>{
 
     d.id != id;
 
@@ -381,6 +381,11 @@ async function excluirDispositivo() {
   renderizar();
   // 7. Limpar o formulário e exibir mensagem de sucesso
   limparFormulario();
+}
+
+function limparelistarformulario(){
+  limparFormulario();
+  listarDispositivos();
 }
 
 // ============================================================
@@ -392,3 +397,4 @@ document.getElementById('btnBuscar').addEventListener('click', buscarPorId);
 document.getElementById('btnCadastrar').addEventListener('click', cadastrarDispositivo);
 document.getElementById('btnAtualizar').addEventListener('click', atualizarDispositivo);
 document.getElementById('btnExcluir').addEventListener('click', excluirDispositivo);
+document.getElementById('btnLimpar').addEventListener('click', limparelistarformulario);
