@@ -358,7 +358,7 @@ async function excluirDispositivo() {
   }
 
   // 3. Fazer a requisição fetch()
-  const respostaHTTP = await fetch(`${URL_API}/${id}` {
+  const respostaHTTP = await fetch(`${URL_API}/${id}` ,{
 
     method: 'DELETE'
 
