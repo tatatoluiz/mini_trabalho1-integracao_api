@@ -5,8 +5,10 @@
 //participação: José Eduardo
 //You Bet!
 // Endereço base da API pública de testes
+// caso precise:
 const URL_API = 'https://restful-apidevcloe.vercel.app/objects';
-
+//caso precise:
+// const URL_API= 'https://api.restful-api.dev/objects'
 // ============================================================
 // VETOR LOCAL (nosso "espelho" dos dados da API)
 // ============================================================
@@ -279,7 +281,59 @@ async function cadastrarDispositivo() {
 }
 
 async function atualizarDispositivo() {
-  alert('Botão ATUALIZAR clicado!');
+  const id=campoId.value.trim();
+  if(!id){
+    alert("id inválido")
+    return
+  }
+
+    try {
+    const respostaHTTP = await fetch(`${URL_API}/${id}`);
+
+    if (!respostaHTTP.ok) {
+      mostrarMensagem('Dispositivo não encontrado (ID: ' + id + ').', 'erro');
+      return;
+    }
+
+    const item = await respostaHTTP.json();
+
+    if(campoNome){
+      item.name=campoNome.value.trim();
+    }else{
+      item.name='';
+    }
+    if(campoCor){
+      item.data.color=campoCor.value.trim();
+    }else{
+      item.data.color=''
+    }
+    if(campoCapacidade){
+      item.data.capacity=campoCapacidade.value.trim();
+    }else{
+      item.data.capacity=''
+    }
+    if(campoPreco){
+      item.data.price=campoPreco.value.trim();
+    }else{
+      item.data.price='';
+    }
+
+    const envioHTTP=await fetch(`${URL_API}/${id}`,{
+      method:'PATCH',
+      headers: {'Content-Type':'aplication/json'},
+      body: JSON.stringify(item)
+    })
+    const funcionou=await envioHTTP.json()
+
+    if (funcionou){
+      dispositivos=[item];
+      renderizar()
+    }
+    mostrarMensagem("deu certo")
+    
+  }catch(erro){
+    mostrarMensagem("Erro ao enviar"+ erro.message + " erro")
+  }
   // TODO: Passo 4
 }
 
