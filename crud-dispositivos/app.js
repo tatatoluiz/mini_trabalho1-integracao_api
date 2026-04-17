@@ -281,6 +281,7 @@ async function cadastrarDispositivo() {
 }
 
 async function atualizarDispositivo() {
+    //Passo 4
   const id=campoId.value.trim();
   if(!id){
     alert("id inválido")
@@ -334,12 +335,12 @@ async function atualizarDispositivo() {
   }catch(erro){
     mostrarMensagem("Erro ao enviar"+ erro.message + " erro")
   }
-  // TODO: Passo 4
+  
 }
 
 async function excluirDispositivo() {
   alert('Botão EXCLUIR clicado!');
-  // TODO: Passo 5
+  //Passo 5
   // 1. Ler o ID do campo campoId e validar se está preenchido
   const id = campoId.value.trim();
   if (!id){
